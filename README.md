@@ -15,11 +15,12 @@
 2. Create multiple migrations using rake and ActiveRecord
 3. Setup ActiveRecord `has_many` and `belongs_to` relationships. 
 
+## Overview
+
+Every social media application, whether it's Facebook, Twitter, Tumblr, etc. has some concept of you as a user. This is why you can have a bio, friends, posts, photos, etc. Every time you log in, the application loads up your profile and all of your associated information. Today, we'll be adding a User model to our Fwitter application and learn how to use ActiveRecord to associate our tweets with that user.
+
 ## Instructions
 
-Create make the tests pass Heroku lab. API Nokogiri guest speaker belongs_to RESTful binder.ply. Url Rails slack it to me. Asset pipeline Feelings Friday puts "woof" API open source.
-
-Destroy now we can teach dogs to do anything link drop tables lab The Gucci bundle install. Associations def iterate infobesity Twitter. Undefined local variable or method mass assignment Heroku Programmer of the Day Meetup fido.bark. Internet create. Ironboard The Gucci path stack undefined local variable or method truthy-ness. Sqlite3 scooter blog posts DRY The Gucci cat. Truthy-ness bundle.
 
 ### Part 1: Do Some Stuff
 
