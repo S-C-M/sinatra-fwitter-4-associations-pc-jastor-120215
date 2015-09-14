@@ -21,6 +21,8 @@ Every social media application, whether it's Facebook, Twitter, Tumblr, etc. has
 
 ## Instructions
 
+Fork and clone this repository and run "bundle install" to get started!
+
 ### Part 1: Creating a users table
 
 By now, you're probably a pro at creating ActiveRecord migrations. Let's create a new migration that will create a table called `users`.  We could add as many attributes as we want - `username`, `fullname`, `bio`, `phone_number`, etc. For now, let's keep it simple with two columns: one for `username`, and one for `email`. 
@@ -169,4 +171,49 @@ D, [2015-09-14T10:19:51.362410 #8945] DEBUG -- :   User Load (0.3ms)  SELECT  "u
 ```
 We can see the SQL that gets fired when we run these methods - ActiveRecord runs queries based on the :user_id associated with the tweets column. Awesome. Let's implement this new functionality into our application. 
 
-### Part 4: Updating our Form
+### Part 4: Updating our Views and Controller
+
+First, if we try to run our application right now, we'll get an error "undefined method 'username' for 'tweet'" This is because our tweets don't respond to a method called username anymore, they respond to a method called "user". Let's update our index page to fix this. 
+
+```erb
+<h1>Welcome to Fwitter!</h1>
+
+<h2>Tweets!</h2>
+<% @tweets.each do |tweet| %>
+	<p><strong><%= tweet.username %>:</strong> <%= tweet.status %></p>
+<% end %>
+```
+First, we'll change this to `tweet.user` to get the user object.
+
+```erb
+<h1>Welcome to Fwitter!</h1>
+
+<h2>Tweets!</h2>
+<% @tweets.each do |tweet| %>
+	<p><strong><%= tweet.user %>:</strong> <%= tweet.status %></p>
+<% end %>
+```
+
+This user object will now respond to a method called username - we can chain this together to get the actual username out of the user object.
+
+```erb
+<h1>Welcome to Fwitter!</h1>
+
+<h2>Tweets!</h2>
+<% @tweets.each do |tweet| %>
+	<p><strong><%= tweet.user.username %>:</strong> <%= tweet.status %></p>
+<% end %>
+```
+
+Awesome. Next, let's update how our tweets get created in our application controller. First, we'll find the user object by the username they enter. Next, we'll pass that user to the tweet upon creation. 
+
+```ruby
+post '/tweet' do
+  user = User.find_by(:username => params[:username])
+  tweet = Tweet.new({:user => user, :status => params[:status]}) 
+  tweet.save 
+  redirect '/'
+end
+```
+
+Now, our tweet will be associated with the user when the form is submitted. Awesome! 
