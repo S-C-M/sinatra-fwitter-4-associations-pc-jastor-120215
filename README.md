@@ -2,7 +2,7 @@
 
 ## Objectives
 
-1. Understand how different models relate to each other in our Sinatra applicaton
+1. Understand how different models relate to each other in our Sinatra application
 2. Create multiple migrations using rake and ActiveRecord
 3. Setup ActiveRecord `has_many` and `belongs_to` relationships. 
 
@@ -38,7 +38,7 @@ class CreateUsers < ActiveRecord::Migration
 
 end
 ```
-This will create a table called users with two columns. Awesome job! Now that our table has been created, let's make a cooresponding model. In your models directory, create a file called `user.rb` and add the following code:
+This will create a table called users with two columns. Awesome job! Now that our table has been created, let's make a corresponding model. In your models directory, create a file called `user.rb` and add the following code:
 
 ```ruby
 class User < ActiveRecord::Base
@@ -51,7 +51,7 @@ Now, our application will have access to a class of `User`. Instances of this cl
 
 If we were to describe the relationship between a User and a Tweet, we might say that a User has many Tweets and that a Tweet belongs to a User. Let's update our application to make this relationship possible. It is our Tweet's responsibility to keep track of who it's user is - ActiveRecord let's us do this using a column called `user_id`. This convention is very important - because a tweet belongs to a user, the column must be called `user_id`. We'll use this to reference our users in the user table. 
 
-How can we update our schema? With another migration file! Let's create a migration called `modify_tweets`. `rake db:create_migration NAME="modify_tweets"` and create methods for `up` and `down`. For our `up` method, we'll use ActiveRecord's `add_column` method to add a column called `user_id`. The syntax for this is `add_column :table_name, :column_name, :data_type`. For our user_id column, add the code below:
+How can we update our schema? With another migration file! Let's create a migration called `modify_tweets` using the rake command `rake db:create_migration NAME="modify_tweets"` Inside our new migration file, create methods for `up` and `down`. For our `up` method, we'll use ActiveRecord's `add_column` method to add a column called `user_id`. The syntax for this is `add_column :table_name, :column_name, :data_type`. For our `user_id` column, add the code below:
 
 ```ruby
 class ModifyTweets < ActiveRecord::Migration
@@ -125,7 +125,7 @@ class Tweet < ActiveRecord::Base
 end
 ```
 
-This just extened our models with new methods. The main ones: our User model now responds to a method called `.tweets`. This will return an array of each tweet instance from our database. Our Tweet class also responds to a method called `user` which returns the user object the tweet is associated with. This relationship works because our `tweets` table has a column called `user_id`. 
+This just extended our models with a bunch of new methods. The main ones: our User model now responds to a method called `.tweets`. This will return an array of each tweet instance from our database. Our Tweet class also responds to a method called `user` which returns the user object the tweet is associated with. This relationship works because our `tweets` table has a column called `user_id`. 
 
 Let's test this out. Boot up `tux` in your console. First, let's destroy all of the Tweets from our database that were created before we had a User model.
 
