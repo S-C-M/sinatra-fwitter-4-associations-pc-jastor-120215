@@ -42,7 +42,6 @@ This will create a table called users with two columns. Awesome job! Now that ou
 
 ```ruby
 class User < ActiveRecord::Base
-
 end
 ```
 Now, our application will have access to a class of `User`. Instances of this class will respond to two methods: `username` and `email`. Be sure to require this new file in your `application_controller` as well. Awesome job!
@@ -61,7 +60,6 @@ class ModifyTweets < ActiveRecord::Migration
   end
   
   def down
-  
   end
   
 end
@@ -79,7 +77,6 @@ class ModifyTweets < ActiveRecord::Migration
   end
   
   def down
-    
   end
   
 end
